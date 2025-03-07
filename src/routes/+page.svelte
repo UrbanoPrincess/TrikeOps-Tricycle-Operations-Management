@@ -1,2 +1,8 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+    import Drivers from './Drivers.svelte';
+</script>
+
+<main>
+    <h1>Welcome to Your Svelte App</h1>
+    <Drivers />
+</main>
