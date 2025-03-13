@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+
     type Driver = {
         name: string;
         license_no: string;
@@ -12,7 +14,8 @@
 
     async function fetchDrivers() {
         try {
-            const response = await fetch('/api/drivers');
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'; // Use environment variable
+            const response = await fetch(`${API_URL}/api/drivers`);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             drivers = await response.json() as Driver[];
         } catch (err) {
@@ -22,7 +25,10 @@
         }
     }
 
-    fetchDrivers();
+    // 🔥 Move fetchDrivers inside onMount to avoid SSR errors
+    onMount(() => {
+        fetchDrivers();
+    });
 </script>
 
 <h2>Drivers List</h2>
